@@ -1,5 +1,7 @@
 from pygame import *
 import sys
+import random
+import math
 
 class GameSprite(sprite.Sprite):
     def __init__(self, player_image, player_x, player_y, player_speed, wight, height):
@@ -105,11 +107,14 @@ ball = GameSprite(
 )
 
 # ==========================
-# Ball speed
+# Ball speed i needed to change it to be more independtant althjough i used angles :/
 # ==========================
 
-speed_x = 4
-speed_y = 4
+speed = 5
+
+angle = random.uniform(-0.5, 0.5)
+speed_x = speed * math.cos(angle)
+speed_y = speed * math.sin(angle)
 
 # ==========================
 # Main loop
