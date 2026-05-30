@@ -139,21 +139,25 @@ while game:
     if ball.rect.y >= win_height - ball.rect.height:
         speed_y *= -1
 
-    # Left paddle collision
+    # Left paddle
     if sprite.collide_rect(racket1, ball):
-        ball.rect.left = racket1.rect.right
-        speed_x *= -1
+        ball.rect.left = racket1.rect.right + 1
+        speed_x = abs(speed_x)
 
-        if speed_y == 0:
-            speed_y = 3
+        offset = (ball.rect.centery - racket1.rect.centery)
+        speed_y = offset / 10
 
-    # Right paddle collision
+        speed_x *= 1.05
+
+    # Right paddle
     if sprite.collide_rect(racket2, ball):
-        ball.rect.right = racket2.rect.left
-        speed_x *= -1
+        ball.rect.right = racket2.rect.left - 1
+        speed_x = -abs(speed_x)
 
-        if speed_y == 0:
-            speed_y = -3
+        offset = (ball.rect.centery - racket2.rect.centery)
+        speed_y = offset / 10
+
+        speed_x *= 1.05
 
     # Player 1 loses
     if ball.rect.x < 0:
